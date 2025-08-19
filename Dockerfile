@@ -1,4 +1,4 @@
-FROM continuumio/miniconda3:25.3.1
+FROM continuumio/miniconda3:25.3.1-1
 
 RUN conda config --add channels defaults
 RUN conda config --add channels conda-forge
