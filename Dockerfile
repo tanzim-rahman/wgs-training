@@ -9,5 +9,5 @@ RUN conda create -y -n assembly spades=4.2.0 quast=5.3.0
 RUN conda create -y -n classify kraken2=2.14 krakentools=1.2.1 krona=2.8.1
 RUN conda create -y -n annot prokka=1.14.6
 RUN conda create -y -n amr abricate=1.0.1
+RUN conda create -y -n pangenome panaroo=1.5.2 snp-sites=2.5.1 seqkit=2.10.1
 RUN conda create -y -n phylogenetics iqtree=3.0.1
-RUN conda create -y -n pangenome roary=3.13.0
