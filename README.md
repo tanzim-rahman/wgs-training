@@ -28,6 +28,8 @@ With the terminal open, run:
 
     docker build -t wgs-training .
 
+If you encouter an error, it is likely because **Docker Desktop** was not run.
+
 ### Step 4: Start a Docker container
 
 First, create a directory somewhere in your computer to hold all files to be used during training. Example: *C:\WGS-Training*.
