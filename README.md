@@ -39,7 +39,7 @@ We recommend downloading the **Standard-8** collection from the **July 2025** up
 1. You can download directory from the website mentioned above (click on the *.tar.gz* link on the Standard-8 row) and save the file into the created database directory.
 2. If you have *curl* or *wget* available (which is not always true for Windows systems), open a terminal inside the created database directory and run:
 
-        curl https://genome-idx.s3.amazonaws.com/kraken/k2_standard_08_GB_20250714.tar.gz
+        curl -o k2_standard_08_GB_20250714.tar.gz https://genome-idx.s3.amazonaws.com/kraken/k2_standard_08_GB_20250714.tar.gz
 
 For the latter method, you can, of course, use *wget* instead of *curl*.
 
