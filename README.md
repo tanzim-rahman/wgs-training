@@ -39,14 +39,14 @@ We recommend downloading the **Standard-8** collection from the **July 2025** up
 1. You can download directory from the website mentioned above (click on the *.tar.gz* link on the Standard-8 row) and save the file into the created database directory.
 2. If you have *curl* or *wget* available (which is not always true for Windows systems), open a terminal inside the created database directory and run:
 
-        curl https://genome-idx.s3.amazonaws.com/kraken/k2_standard_032_GB_20250714.tar.gz
+        curl https://genome-idx.s3.amazonaws.com/kraken/k2_standard_08_GB_20250714.tar.gz
 
 For the latter method, you can, of course, use *wget* instead of *curl*.
 
-When download is complete using either method, you will see a *k2_standard_032_GB_20250714.tar.gz* file (the name can be different if you have downloaded a different database). To extract the database, open a terminal in the downloaded directory and run:
+When download is complete using either method, you will see a *k2_standard_08_GB_20250714.tar.gz* file (the name can be different if you have downloaded a different database). To extract the database, open a terminal in the downloaded directory and run:
 
-    tar -xvzf k2_standard_032_GB_20250714.tar.gz
-    rm k2_standard_032_GB_20250714.tar.gz
+    tar -xvzf k2_standard_08_GB_20250714.tar.gz
+    rm k2_standard_08_GB_20250714.tar.gz
 
 If you **DON'T** have *tar* available (on older versions of Windows), you can perform this step after the Docker container has been started.
 
@@ -71,8 +71,8 @@ If an error occurs when starting a container, it is likely because **Docker Desk
 If you were unable to extract the Kraken2 database previously, then simply run:
 
     cd /kraken2db
-    tar -xvzf k2_standard_032_GB_20250714.tar.gz
-    rm k2_standard_032_GB_20250714.tar.gz
+    tar -xvzf k2_standard_08_GB_20250714.tar.gz
+    rm k2_standard_08_GB_20250714.tar.gz
     cd /run-dir
 
 ### Step 6: Bioinformatics analysis
