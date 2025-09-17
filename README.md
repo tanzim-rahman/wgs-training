@@ -10,7 +10,7 @@ TODO
 
 Visit [the Docker website](https://www.docker.com) and follow the instructions there. After installation completes, make sure to run **Docker Desktop**.
 
-If you are on **Windows**, you may get an option to install **WSL**. Do it.
+If you are on **Windows**, make sure to install **WSL** if prompted to do so.
 
 ### Step 2: Download repository
 
@@ -20,7 +20,7 @@ Alternatively, if you have **git** installed, use:
 
     git clone https://github.com/tanzim-rahman/wgs-training.git
 
-After downloading (and extraction) is completed, enter the downloaded directory. You should see two files: *Dockerfile* and *README.md*. Open a terminal inside this directory.
+Once downloading (and extraction) is completed, enter the downloaded directory. You should see two files: *Dockerfile* and *README.md*. Open a terminal inside this directory.
 
 ### Step 3: Create the Docker image
 
@@ -28,27 +28,30 @@ With the terminal open, run:
 
     docker build -t wgs .
 
-If you encouter an error, it is likely because **Docker Desktop** is not running.
+If you encounter an error, it is likely because **Docker Desktop** is not running.
 
 ### Step 4: Download the Kraken2 database
 
-Kraken2 is used in this pipeline to perform taxinomic classification. Kraken2 requires a database to be downloaded which is available at <https://benlangmead.github.io/aws-indexes/k2>.
+[*Kraken2*](https://github.com/DerrickWood/kraken2) is used in this pipeline to perform taxonomic classification. This requires a database available at <https://benlangmead.github.io/aws-indexes/k2>.
 
-We recommend downloading the **Standard-8** collection from the **July 2025** update. First create a directory somewhere on your computer to hold the database files. Next, you can download using two methods:
+We recommend downloading the **Standard-8** collection from the **July 2025** update. First create a directory somewhere on your computer to hold the database files. Next, you can download using either of two methods:
 
-1. You can download directory from the website mentioned above (click on the *.tar.gz* link on the Standard-8 row) and save the file into the created database directory.
+1. You can download directory from the website mentioned above (click on the *.tar.gz* link on the **Standard-8** row) and save the file into the created database directory.
 2. If you have *curl* or *wget* available (which is not always true for Windows systems), open a terminal inside the created database directory and run:
 
         curl -o k2_standard_08_GB_20250714.tar.gz https://genome-idx.s3.amazonaws.com/kraken/k2_standard_08_GB_20250714.tar.gz
 
-For the latter method, you can, of course, use *wget* instead of *curl*.
+    For the latter method, you can use *wget* instead of *curl*.
 
-When download is complete using either method, you will see a *k2_standard_08_GB_20250714.tar.gz* file (the name can be different if you have downloaded a different database). To extract the database, open a terminal in the downloaded directory and run:
+        wget k2_standard_08_GB_20250714.tar.gz https://genome-idx.s3.amazonaws.com/kraken/k2_standard_08_GB_20250714.tar.gz
+
+After downloading has been completed using either method, you will see a *k2_standard_08_GB_20250714.tar.gz* file (the name can be different if you have downloaded a different database). To extract the database, open a terminal in the downloaded directory and run:
 
     tar -xvzf k2_standard_08_GB_20250714.tar.gz
-    rm k2_standard_08_GB_20250714.tar.gz
 
 If you **DON'T** have *tar* available (on older versions of Windows), you can perform this step after the Docker container has been started.
+
+Once database extraction is done, you may remove the *k2_standard_08_GB_20250714.tar.gz* file in order to preserve storage space.
 
 ### Step 5: Start a Docker container
 
@@ -58,21 +61,27 @@ Afterwards, run:
 
     docker run --rm -it -v RUN_DIR:/run-dir RAW_FILES_DIR:/raw-files KRAKEN2DB_DIR:/kraken2db wgs-training /bin/bash
 
-**RUN_DIR** is the path to the directory where run outputs will be stored. In our example, this is *C:\WGS-Training*.
+where:
 
-**RAW_FILES_DIR** is the path to the directory containing the raw sequence files.
-
-**KRAKEN2DB_DIR** is the path to the directory containing the downloaded Kraken2 database.
+- **RUN_DIR** is the full path to the directory where run outputs will be stored. In our example, this is *C:\WGS-Training*.
+- **RAW_FILES_DIR** is the full path to the directory containing the raw sequence files.
+- **KRAKEN2DB_DIR** is the full path to the directory containing the downloaded Kraken2 database.
 
 When the container starts, you should already be in the */run-dir* directory.
 
 If an error occurs when starting a container, it is likely because **Docker Desktop** was not started.
 
-If you were unable to extract the Kraken2 database previously, then simply run:
+If you were unable to extract the Kraken2 database previously in *Step 4*, then simply run:
 
     cd /kraken2db
     tar -xvzf k2_standard_08_GB_20250714.tar.gz
+
+**Optionally**, you may remove the *k2_standard_08_GB_20250714.tar.gz* file.
+
     rm k2_standard_08_GB_20250714.tar.gz
+
+Finally, return to the */run-dir* directory.
+
     cd /run-dir
 
 ### Step 6: Bioinformatics analysis
