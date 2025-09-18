@@ -49,7 +49,7 @@ docker build -t wgs .
 > Make sure your terminal is open inside the unzipped folder. Use ***dir*** (Windows) or ***ls*** (Mac, Linux) to check if the *Dockerfile* and *README.md* files are present. If not, you are likely in another directory. Use ***cd*** to move to the unzipped directory and rerun the command above.
 
 > [!CAUTION]
-> If you encounter an error, it is likely because **Docker Desktop** is not running.
+> Ensure that Docker Desktop is running when using the above command, otherwise you will receive an error.
 
 ### Step 4: Download the Kraken2 database
 
@@ -77,7 +77,7 @@ docker build -t wgs .
         curl -o k2_standard_08_GB_20250714.tar.gz https://genome-idx.s3.amazonaws.com/kraken/k2_standard_08_GB_20250714.tar.gz
     OR
 
-        wget k2_standard_08_GB_20250714.tar.gz https://genome-idx.s3.amazonaws.com/kraken/k2_standard_08_GB_20250714.tar.gz
+        wget https://genome-idx.s3.amazonaws.com/kraken/k2_standard_08_GB_20250714.tar.gz
     </details>
 
 After downloading has been completed using either method, you will see a *k2_standard_08_GB_20250714.tar.gz* file (the name may be different if you have downloaded a different database).
@@ -98,12 +98,12 @@ docker run --rm -it -v "C:\WGS-Training\run-dir:/run-dir" -v "C:\WGS-Training\ra
 ```
 
 > [!WARNING]
-> READ CAREFULLY! In the above command, we used the three paths ***C:\WGS-Training\run-dir***, ***C:\WGS-Training\raw-data*** and ***C:\kraken2db*** when starting the Docker container. If you have downloaded your *Kraken2* database somewhere else, or wish to store the **raw sequence files** or the **run outputs** elsewhere, replace the three paths accordingly. **DO NOT** change the ***/run-dir***, ***/raw-data*** and ***/kraken2db*** parts. Ensure that the **full address** is provided to the command, i.e., NOT the relative path. **Example:** If you download the *Kraken2* database into a ***Kraken Database*** directory inside your ***Documents*** directory, replace the **-v "C:\kraken2db:/kraken2db"** part of the above command with **-v "C:\Users\my-username\Documents\Kraken Database:/kraken2db**.
+> READ CAREFULLY! In the above command, we used the three paths ***C:\WGS-Training\run-dir***, ***C:\WGS-Training\raw-data*** and ***C:\kraken2db*** when starting the Docker container. If you have downloaded your *Kraken2* database somewhere else, or wish to store the **raw sequence files** or the **run outputs** elsewhere, replace the three paths accordingly. **DO NOT** change the ***/run-dir***, ***/raw-data*** and ***/kraken2db*** parts. Ensure that the **full address** is provided to the command, i.e., NOT the relative path. **Example:** If you download the *Kraken2* database into a ***Kraken Database*** directory inside your ***Documents*** directory, replace the `-v "C:\kraken2db:/kraken2db"` part of the above command with `-v "C:\Users\my-username\Documents\Kraken Database:/kraken2db"`.
 
 When the container starts, you should already be in the */run-dir* directory.
 
 > [!CAUTION]
-> If an error occurs when starting a container, it is likely because **Docker Desktop** was not started.
+> Ensure that Docker Desktop is running when using the above command, otherwise you will receive an error.
 
 ### Step 6: Extract the Kraken2 database
 
@@ -114,7 +114,7 @@ cd /kraken2db
 tar -xvzf k2_standard_08_GB_20250714.tar.gz
 ```
 
-**Optionally**, you may remove the *k2_standard_08_GB_20250714.tar.gz* file.
+Afterwards, you may **optionally** remove the *k2_standard_08_GB_20250714.tar.gz* file.
 
 ```bash
 rm k2_standard_08_GB_20250714.tar.gz
@@ -127,7 +127,7 @@ cd /run-dir
 ```
 
 > [!NOTE]
-> If you have downloaded a different version of the database, the name may be different, Modify the previous three commands accordingly.
+> If you have downloaded a different version of the database, the name may be different. Modify the previous three commands accordingly.
 
 ### Step 7: Bioinformatics analysis
 
